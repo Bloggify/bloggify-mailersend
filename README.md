@@ -17,17 +17,17 @@
 
 
 
-# bloggify-sendgrid
+# bloggify-mailersend
 
- [![Version](https://img.shields.io/npm/v/bloggify-sendgrid.svg)](https://www.npmjs.com/package/bloggify-sendgrid) [![Downloads](https://img.shields.io/npm/dt/bloggify-sendgrid.svg)](https://www.npmjs.com/package/bloggify-sendgrid)
-
-
+ [![Version](https://img.shields.io/npm/v/bloggify-mailersend.svg)](https://www.npmjs.com/package/bloggify-mailersend) [![Downloads](https://img.shields.io/npm/dt/bloggify-mailersend.svg)](https://www.npmjs.com/package/bloggify-mailersend)
 
 
 
 
 
-> Bloggify plugin for sending emails via SendGrid.
+
+
+> Bloggify plugin for sending emails via mailersend.
 
 
 
@@ -49,10 +49,10 @@
 
 ```sh
 # Using npm
-npm install --save bloggify-sendgrid
+npm install --save bloggify-mailersend
 
 # Using yarn
-yarn add bloggify-sendgrid
+yarn add bloggify-mailersend
 ```
 
 
@@ -72,16 +72,13 @@ yarn add bloggify-sendgrid
 
 
 ```js
-const Email = Bloggify.require("bloggify-sendgrid", true);
+const Email = Bloggify.require("bloggify-mailersend");
 
 Email.send({
-    to_email: "someone@domain.com"
-  , from_email: "me@domain.com"
+    to_email: "alice@domain.com"
+  , from_email: "bob@domain.com"
   , subject: "Hello world!"
-  , template_id: "your template id"
-  , substitutions: {
-      "-name-": "Alice"
-    }
+  , text: "This is a test email."
 }, (err, data) => {
     console.log(err || data);
 });
@@ -89,6 +86,38 @@ Email.send({
 
 
 
+
+
+
+
+
+
+
+
+## :memo: Documentation
+
+
+### Plugin Configuration
+
+- **Object** `config`:
+  - `key` (String): The MailerSend API key.
+
+### `send(message)`
+Send an email.
+
+#### Params
+
+- **Object** `message`: An object containing:
+  - `to_email` (String): The recipient email address.
+  - `to_name` (String): The recipient name.
+  - `from_email` (String): The sender email address.
+  - `from_name` (String): The sender name.
+  - `subject` (String): The email subject.
+  - `text` (String): The email text content.
+  - `html` (String): The email HTML content.
+
+#### Return
+- **Promise** A promise resolving the result from MailerSend.
 
 
 
@@ -106,33 +135,6 @@ There are few ways to get help:
 
  1. Please [post questions on Stack Overflow](https://stackoverflow.com/questions/ask). You can open issues with questions, as long you add a link to your Stack Overflow question.
  2. For bug reports and feature requests, open issues. :bug:
-
-
-
-
-
-
-
-## :memo: Documentation
-
-
-### Plugin Configuration
-
-- **Object** `config`:
-  - `key` (String): The Sendgrid API key.
-
-### `send(data)`
-Send an email.
-
-#### Params
-
-- **Object** `data`: An object containing the message object sent to Sendgrid, as [documented here](https://github.com/sendgrid/sendgrid-nodejs/blob/master/packages/mail/USE_CASES.md).
-In the Bloggify config you will have to provide the following data:
-
- - `key` (String): The SendGrid key.
-
-#### Return
-- **Promise** A promise resolving the result from Sendgrid.
 
 
 
@@ -162,14 +164,6 @@ Have an idea? Found a bug? See [how to contribute][contributing].
 
 
 
-
-
-
-## :dizzy: Where is this library used?
-If you are using this library in one of your projects, add it in this list. :sparkles:
-
- - `bloggify.org`
- - `ionicabizau.net`
 
 
 
